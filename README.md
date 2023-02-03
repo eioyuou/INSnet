@@ -27,7 +27,7 @@ conda install numpy, pandas, Matplotlib, TensorFlow 2.7, pysam
 ## Usage
 ### 1.Produce data for call SV
 ```　 
-python INSnet.py create_feature bamfile_path_long output_data_folder max_work(default:5) includecontig   
+python INSnet.py generate_feature bamfile_path_long output_data_folder max_work(default:5) includecontig   
     
 bamfile_path_long is the path of the alignment file about the reference and the long read set;    
 output_data_folder is a folder which is used to store evaluation data;  

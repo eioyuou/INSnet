@@ -13,12 +13,12 @@ from generate_feature import create_data_long_mul
 
 import tensorflow as tf
 #tf.config.set_visible_devices([], 'GPU')
-model = gru_model()
+#model = gru_model()
 mode = sys.argv[1]
 debug = 0
 #create_data_long_mul(bamfile_long_path,outputpath,contig,max_work = 10)
 
-
+print(len(sys.argv))
 if(mode == 'generate_feature'):
     if(len(sys.argv) not in [4, 5, 6]):
         debug = 1
@@ -38,7 +38,7 @@ if(mode == 'generate_feature'):
         else:
             print('Following chromosomes will be used')
             print(includecontig)
-            create_data_longshort_mul(bamfile_long_path = bamfilepath_long, outputpath=outputpath, contig=includecontig,max_work = max_work)
+            create_data_long_mul(bamfile_long_path = bamfilepath_long, outputpath=outputpath, contig=includecontig,max_work = max_work)
         print('\n\n')
         print('Completed')
         print('\n\n')
@@ -76,9 +76,9 @@ if(debug ==1):
     print('\n\n')
     print('Useage')
     print('Produce data for call sv')
-    print('python INSnet.py create_feature bamfile_path_long output_data_folder max_work includecontig(default:[](all chromosomes))')
+    print('python INSnet.py generate_feature bamfile_path_long output_data_folder max_work includecontig(default:[](all chromosomes))')
     print('Call sv')
-    print('insertion_predict_weight,datapath,bamfilepath,outvcfpath,support, includecontig(default:[](all chromosomes)')
+    print('python INSnet.py call_sv insertion_predict_weight,datapath,bamfilepath,outvcfpath,support, includecontig(default:[](all chromosomes)')
 
 
 # In[ ]:

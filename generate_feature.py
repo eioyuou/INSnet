@@ -307,11 +307,11 @@ def create_data_long(bamfile_long_path,outputpath,contig):
             if len(x_data) == 0:
                 continue
             x_data = fun(x_data)
-            y_label = labeldata('/tf/home/gaoruntian/code/structual_variant_practice/result/HG002_SVs_Tier1_v0.6.vcf.gz',chr_name_long,start,end,200,index)
-            y_label = y_label.reshape(-1,1)
+            #y_label = labeldata('/tf/home/gaoruntian/HG002_SVs_Tier1_v0.6.vcf.gz',chr_name_long,start,end,200,index)
+            #y_label = y_label.reshape(-1,1)
             #print(x_data.shape,y_label.shape)
 
-            x_data = np.concatenate([x_data,y_label],axis = 1)
+            #x_data = np.concatenate([x_data,y_label],axis = 1)
             print(x_data.shape)
             if 'chr' in chr_name_long:
                 filename_data = outputpath + '/'   + chr_name_long + '_' + str(start-10000000)+ '_' + str(end-10000000) +'.npy'

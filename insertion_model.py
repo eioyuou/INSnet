@@ -415,7 +415,7 @@ def mergedeleton_long(pre,index,chr_name,bamfile):
 
 
 def batchdata(data,batch_size,step,window = 200):
-    data = data[:,:-1]
+    data = data[:,:]
     
     #data = data.reshape(-1,8)
     #data[:,-3:]=0

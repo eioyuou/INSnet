@@ -52,7 +52,7 @@ elif(mode == 'call_sv'):
         if(len(sys.argv) == 8):
             deletion_predict_weight,datapath,bamfilepath,outvcfpath,support,contigg = sys.argv[2], sys.argv[3], sys.argv[4],sys.argv[5],sys.argv[6], [str(contig) for contig in eval(sys.argv[7])]
         else:
-            deletion_predict_weight,genotype_predict_weight,datapath,bamfilepath,outvcfpath,support,contigg = sys.argv[2], sys.argv[3], sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[6], []
+            deletion_predict_weight,datapath,bamfilepath,outvcfpath,support,contigg = sys.argv[2], sys.argv[3], sys.argv[4],sys.argv[5],sys.argv[6], []
         
         print('bamfile path ', bamfilepath)
         print('weight path ', deletion_predict_weight)
@@ -64,7 +64,7 @@ elif(mode == 'call_sv'):
             print('Following chromosomes will be used')
             print(contigg)
             
-        predict_funtion(deletion_predict_weight,genotype_predict_weight,datapath,bamfilepath,outvcfpath,contigg,support)
+        predict_funtion(deletion_predict_weight,datapath,bamfilepath,outvcfpath,contigg,support)
         #predict_fn(datapath = datapath, weightpath = weightpath, bamfilepath = bamfilepath, includecontig=includecontig )
         print('\n\n')
         print('Completed, Result saved in current folder')

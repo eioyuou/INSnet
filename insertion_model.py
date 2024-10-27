@@ -28,7 +28,7 @@ import time
 
 
 import os
-#os.environ['CUDA_VISIBLE|_DEVICES']="1" # 指定哪块GPU训练
+#os.environ['CUDA_VISIBLE|_DEVICES']="1" 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
@@ -36,24 +36,23 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 class ECALayer(tf.keras.layers.Layer):
-    # 初始化num_outputs，即当前层输出元素的个数
+  
     def __init__(self):
         super(ECALayer, self).__init__()
 
 
-     #在第一次调用该Layer的call方法前（自动）调用该函数，可以知道输入数据的shape
-	# 根据输入数据的shape可以初始化权值、bias的矩阵
+
     def build(self, input_shape):
     
-        # 根据公式计算自适应卷积核大小
+       
         self.in_channel = input_shape[-1]
         self.kernel_size = int(abs((math.log(self.in_channel, 2) +1 ) / 2))
 
-        # 如果卷积核大小是偶数，就使用它
+        
         if self.kernel_size % 2:
             self.kernel_size = self.kernel_size
 
-        # 如果卷积核大小是奇数就变成偶数
+        
         else:
             self.kernel_size = self.kernel_size + 1
         self.con = tf.keras.layers.Conv1D(filters=1, kernel_size=self.kernel_size, padding='same', use_bias=False)   

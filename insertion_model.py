@@ -492,38 +492,28 @@ def find_geno(inss,b):
 
 # In[10]:
 
-
 def tovcf(rawsvlist, contig2length, outputpath):
-    top = """##fileformat=VCFv4.2
+    head = """##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">\n"""
     body = ''
-    for contig in contig2length:
-        body += "##contig=<ID="+contig+",length="+str(int(contig2length[contig]))+">\n"
+    for contig in contiglength:
+        body += "##contig=<ID=" + contig + ",length=" + str(int(contiglength[contig])) + ">\n"
     tail = """##INFO=<ID=END,Number=1,Type=Integer,Description="End position of the structural variant">
 ##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of SV:DEL=Deletion, INS=Insertion">
 ##INFO=<ID=SVLEN,Number=.,Type=Integer,Description="Difference in length between REF and ALT alleles">
-##INFO=<ID=RE,Number=1,Type=Integer,Description="Number of read support this record">
 ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t.\n"""
-
-    myvcf = top+body+tail
-    #genomapper = {0:'0/1', 1:'1/1'}
-    #svlist = [[rec[0], int(rec[1]), int(rec[2]), int(rec[3]), rec[-1]]]
-        
-    for rec in rawsvlist:
-
-
+    vcfinfo = head + body + tail
+    for rec in inslist:
         contig = rec[0]
-
-
-        geno = '.'
-        
-        recinfo = 'SVLEN=' + str(int(rec[2]))+';SVTYPE=' + 'INS'+';END='+str(rec[1])+';RE='+str(int(rec[3])+1)+'\tGT\t'+str(geno)+'\n'
-        myvcf += (contig +'\t'+ str(int(rec[1]))+'\t'+ '.'+'\t'+ '.'+'\t'+ '.'+'\t'+ str(int(rec[3])+1)+'\t'+ 'PASS'+'\t'+recinfo)
-
-
-    with open(outputpath, "w") as f:
-        f.write(myvcf)
+        geno = rec[-1]
+        recinfo = 'SVLEN=' + str(int(rec[2])) + ';SVTYPE=' + 'INS' + ';END=' + str(rec[1]) + ';' + '\tGT\t' + str(
+            geno) + '\n'
+        vcfinfo += (contig + '\t' + str(
+            int(rec[1])) + '\t' + '.' + '\t' + '.' + '\t' + 'A' + '\t' + '.' + '\t' + 'PASS' + '\t' + recinfo)
+    f = open(out_vcfpath, 'w')
+    f.write(vcfinfo)
+    f.close()
 
 
 # In[49]:
